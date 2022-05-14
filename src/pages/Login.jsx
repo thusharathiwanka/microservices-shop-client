@@ -15,12 +15,13 @@ const Login = () => {
 	const [buttonStatus, setButtonStatus] = useState(false);
 	const [customer, setCustomer] = useState({ email: "", password: "" });
 
-	const loginCustomer = async (e) => {
+	const loginCustomer = async e => {
 		e.preventDefault();
 		setButtonStatus(true);
 
 		try {
-			await axios.post("customers/login", customer);
+			const res = await axios.post("users/login", customer);
+			localStorage.setItem("token", res.data.token);
 			setCustomer({});
 			setButtonStatus(false);
 			await getLoggedIn();
@@ -36,17 +37,11 @@ const Login = () => {
 			{error && <Error error={error} />}
 			<div className="text-gray-800 max-w-screen-2.5xl ml-auto max-h-88 pl-4 flex justify-between items-center overflow-hidden relative">
 				<div className="font-semibold text-lg">
-					<h1
-						data-aos="fade-up"
-						className="text-5xl font-extrabold pb-10 text-center"
-					>
+					<h1 data-aos="fade-up" className="text-5xl font-extrabold pb-10 text-center">
 						Sign into your Account
 					</h1>
 					<form onSubmit={loginCustomer}>
-						<div
-							className="flex flex-col justify-start pb-5"
-							data-aos="fade-up-left"
-						>
+						<div className="flex flex-col justify-start pb-5" data-aos="fade-up-left">
 							<label htmlFor="email" className="pb-1">
 								Email Address
 							</label>
@@ -58,9 +53,7 @@ const Login = () => {
 								className="outline-none rounded-full border px-4 py-3 focus:border-light-blue focus:border-2 transition duration-500 ease-in-out"
 								required
 								value={customer.email}
-								onChange={(e) =>
-									setCustomer({ ...customer, email: e.target.value })
-								}
+								onChange={e => setCustomer({ ...customer, email: e.target.value })}
 							/>
 						</div>
 						<div
@@ -79,9 +72,7 @@ const Login = () => {
 								className="outline-none rounded-full border px-4 py-3 focus:border-light-blue transition duration-500 ease-in-out"
 								required
 								value={customer.password}
-								onChange={(e) =>
-									setCustomer({ ...customer, password: e.target.value })
-								}
+								onChange={e => setCustomer({ ...customer, password: e.target.value })}
 							/>
 						</div>
 						<p data-aos-delay="100" data-aos="fade-up-left">
