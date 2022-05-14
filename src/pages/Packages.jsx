@@ -30,7 +30,7 @@ const Packages = () => {
 		e.preventDefault();
 		if (searchQuery) {
 			setIsLoading(true);
-			const res = await axios.get("packages/active");
+			const res = await axios.get("products/active");
 			const filteredActivePackages = res.data.data.filter(activePackage =>
 				activePackage.name.toLowerCase().includes(searchQuery.toLowerCase())
 			);
