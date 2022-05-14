@@ -38,9 +38,9 @@ const Routes = () => {
 	return (
 		<Switch>
 			<Route exact path="/">
-				{loggedIn.state && loggedIn.role !== "customer" ? (
-					<Redirect to={`/auth/${loggedIn.role}/dashboard`} />
-				) : loggedIn.state && loggedIn.role === "customer" ? (
+				{loggedIn.state && loggedIn.role !== "User" ? (
+					<Redirect to={`/auth/${loggedIn.role.toLowerCase()}/dashboard`} />
+				) : loggedIn.state && loggedIn.role === "User" ? (
 					<Redirect to={`/auth/user/packages`} />
 				) : (
 					<>
@@ -51,7 +51,7 @@ const Routes = () => {
 			</Route>
 			<Route exact path="/auth/register">
 				{loggedIn.state && loggedIn.role ? (
-					<Redirect to={`/auth/${loggedIn.role}/dashboard`} />
+					<Redirect to={`/auth/${loggedIn.role.toLowerCase()}/dashboard`} />
 				) : (
 					<>
 						<Navbar />
@@ -187,9 +187,9 @@ const Routes = () => {
 				<EditBlog />
 			</Route>
 			<Route exact path="*">
-				{loggedIn.state && loggedIn.role !== "customer" ? (
+				{loggedIn.state && loggedIn.role !== "User" ? (
 					<Redirect to={`/auth/${loggedIn.role}/dashboard`} />
-				) : loggedIn.state && loggedIn.role === "customer" ? (
+				) : loggedIn.state && loggedIn.role === "User" ? (
 					<Redirect to={`/auth/user/packages`} />
 				) : (
 					<Redirect to={`/`} />

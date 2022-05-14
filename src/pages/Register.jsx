@@ -20,17 +20,17 @@ const Register = () => {
 	const { getLoggedIn } = useContext(AuthContext);
 	const history = useHistory();
 
-	const registerCustomer = async (e) => {
+	const registerCustomer = async e => {
 		e.preventDefault();
 		setButtonStatus(true);
 		console.log(customer);
 
-		customer.createdAt = customer.updatedAt = new Date();
-
 		try {
-			await axios.post("customers/register", customer);
+			const res = await axios.post("users/", customer);
+			console.log(res.data);
 			setCustomer({});
 			setButtonStatus(false);
+			localStorage.setItem("token", res.data.token);
 			await getLoggedIn();
 			history.push("/auth/user/packages");
 		} catch (err) {
@@ -44,17 +44,11 @@ const Register = () => {
 			{error && <Error error={error} />}
 			<div className="text-gray-800 max-w-screen-2.5xl ml-auto max-h-88 pl-4 flex justify-between items-center overflow-hidden relative">
 				<div className="font-semibold text-lg">
-					<h1
-						data-aos="fade-up"
-						className="text-5xl font-extrabold pb-10 text-center"
-					>
+					<h1 data-aos="fade-up" className="text-5xl font-extrabold pb-10 text-center">
 						Create an Account
 					</h1>
 					<form>
-						<div
-							className="flex flex-col justify-start pb-5"
-							data-aos="fade-up-left"
-						>
+						<div className="flex flex-col justify-start pb-5" data-aos="fade-up-left">
 							<label htmlFor="name" className="pb-1">
 								Name
 							</label>
@@ -66,9 +60,7 @@ const Register = () => {
 								required
 								autoComplete="off"
 								value={customer.name}
-								onChange={(e) =>
-									setCustomer({ ...customer, name: e.target.value })
-								}
+								onChange={e => setCustomer({ ...customer, name: e.target.value })}
 							/>
 						</div>
 						<div
@@ -87,9 +79,7 @@ const Register = () => {
 								className="outline-none rounded-full border px-4 py-3 focus:border-light-blue focus:border-2 transition duration-500 ease-in-out"
 								required
 								value={customer.email}
-								onChange={(e) =>
-									setCustomer({ ...customer, email: e.target.value })
-								}
+								onChange={e => setCustomer({ ...customer, email: e.target.value })}
 							/>
 						</div>
 						<div
@@ -108,9 +98,7 @@ const Register = () => {
 								className="outline-none rounded-full border px-4 py-3 focus:border-light-blue transition duration-500 ease-in-out"
 								required
 								value={customer.password}
-								onChange={(e) =>
-									setCustomer({ ...customer, password: e.target.value })
-								}
+								onChange={e => setCustomer({ ...customer, password: e.target.value })}
 							/>
 						</div>
 						<div
@@ -130,9 +118,7 @@ const Register = () => {
 								required
 								maxLength="10"
 								value={customer.mobile}
-								onChange={(e) =>
-									setCustomer({ ...customer, mobile: e.target.value })
-								}
+								onChange={e => setCustomer({ ...customer, mobile: e.target.value })}
 							/>
 						</div>
 						<p data-aos-delay="200" data-aos="fade-up-left">
