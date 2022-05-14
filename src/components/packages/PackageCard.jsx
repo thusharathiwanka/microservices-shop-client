@@ -17,11 +17,7 @@ const PackageCard = ({ packageItem, setDelay }) => {
 				{"LKR " + packageItem.price + ".00"}
 			</span>
 			<div className="w-72">
-				<img
-					src={imageURL + packageItem.src}
-					alt="package-img"
-					className="w-full h-72 object-cover"
-				/>
+				<img src={packageItem.src} alt="package-img" className="w-full h-50 object-cover" />
 			</div>
 			<div className="p-5">
 				<h3 className="font-semibold text-lg">{packageItem.name}</h3>
@@ -29,7 +25,7 @@ const PackageCard = ({ packageItem, setDelay }) => {
 				<div className="flex justify-between pt-4 items-center">
 					<select
 						className="border rounded-full px-4 py-1 focus:outline-none"
-						onClick={(e) => {
+						onClick={e => {
 							setQuantity(e.target.value);
 						}}
 					>

@@ -16,8 +16,8 @@ const Packages = () => {
 
 	const getPackages = async () => {
 		try {
-			const res = await axios.get("packages/active");
-			setActivePackages(res.data.packages);
+			const res = await axios.get("products/active");
+			setActivePackages(res.data.data);
 			setSearchQuery("");
 			setIsSearchEmpty(false);
 			setIsLoading(false);
@@ -26,12 +26,12 @@ const Packages = () => {
 		}
 	};
 
-	const getPackagesBasedOnSearchQuery = async (e) => {
+	const getPackagesBasedOnSearchQuery = async e => {
 		e.preventDefault();
 		if (searchQuery) {
 			setIsLoading(true);
 			const res = await axios.get("packages/active");
-			const filteredActivePackages = res.data.packages.filter((activePackage) =>
+			const filteredActivePackages = res.data.data.filter(activePackage =>
 				activePackage.name.toLowerCase().includes(searchQuery.toLowerCase())
 			);
 
@@ -52,13 +52,8 @@ const Packages = () => {
 	return (
 		<div className="text-gray-800 max-w-screen-2xl mx-auto px-4">
 			<div className=" flex flex-col items-center pt-14">
-				<h1 className="text-5xl font-extrabold pb-10 text-center">
-					Select what's Best for You
-				</h1>
-				<form
-					className="w-2/4 text-center relative mb-12"
-					onSubmit={getPackagesBasedOnSearchQuery}
-				>
+				<h1 className="text-5xl font-extrabold pb-10 text-center">Select what's Best for You</h1>
+				<form className="w-2/4 text-center relative mb-12" onSubmit={getPackagesBasedOnSearchQuery}>
 					<input
 						type="text"
 						name="search"
@@ -66,7 +61,7 @@ const Packages = () => {
 						className="outline-none rounded-full border px-8 py-3 focus:border-light-blue w-full"
 						placeholder="Search here..."
 						value={searchQuery}
-						onChange={(e) => {
+						onChange={e => {
 							setSearchQuery(e.target.value);
 						}}
 					/>
@@ -104,7 +99,7 @@ const Packages = () => {
 							</button>
 						</div>
 					)}
-					{activePackages.map((packageItem) => (
+					{activePackages.map(packageItem => (
 						<PackageCard packageItem={packageItem} key={packageItem._id} />
 					))}
 				</div>
