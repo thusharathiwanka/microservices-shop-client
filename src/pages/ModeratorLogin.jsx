@@ -15,16 +15,18 @@ const AdminLogin = () => {
 	const [buttonStatus, setButtonStatus] = useState(false);
 	const [moderator, setModerator] = useState({ username: "", password: "" });
 
-	const loginModerator = async (e) => {
+	const loginModerator = async e => {
 		e.preventDefault();
 		setButtonStatus(true);
 
 		try {
-			const res = await axios.post("moderators/login", moderator);
+			const res = await axios.post("admin/login", moderator);
+			console.log(res.data);
 			setModerator({});
 			setButtonStatus(false);
+			localStorage.setItem("token", res.data.token);
 			await getLoggedIn();
-			history.push(`/auth/${res.data.type}/dashboard`);
+			history.push(`/auth/${res.data.role}/dashboard`);
 		} catch (err) {
 			setError(err.response.data.message);
 			setButtonStatus(false);
@@ -37,17 +39,11 @@ const AdminLogin = () => {
 			{error && <Error error={error} />}
 			<div className="text-gray-800 max-w-screen-2xl mx-auto min-h-88 pl-4 flex justify-between items-center overflow-hidden">
 				<div className="font-semibold text-lg w-2/5 max-w-full mx-auto">
-					<h1
-						data-aos="fade-up"
-						className="text-5xl font-extrabold pb-16 text-center -mt-20"
-					>
+					<h1 data-aos="fade-up" className="text-5xl font-extrabold pb-16 text-center -mt-20">
 						Moderator Login
 					</h1>
 					<form onSubmit={loginModerator}>
-						<div
-							className="flex flex-col justify-start pb-5"
-							data-aos="fade-up-left"
-						>
+						<div className="flex flex-col justify-start pb-5" data-aos="fade-up-left">
 							<label htmlFor="username" className="pb-1">
 								Username
 							</label>
@@ -59,9 +55,7 @@ const AdminLogin = () => {
 								className="outline-none rounded-full border px-4 py-3 focus:border-light-blue focus:border-2 transition duration-500 ease-in-out"
 								required
 								value={moderator.email}
-								onChange={(e) =>
-									setModerator({ ...moderator, username: e.target.value })
-								}
+								onChange={e => setModerator({ ...moderator, username: e.target.value })}
 							/>
 						</div>
 						<div
@@ -80,9 +74,7 @@ const AdminLogin = () => {
 								className="outline-none rounded-full border px-4 py-3 focus:border-light-blue transition duration-500 ease-in-out"
 								required
 								value={moderator.password}
-								onChange={(e) =>
-									setModerator({ ...moderator, password: e.target.value })
-								}
+								onChange={e => setModerator({ ...moderator, password: e.target.value })}
 							/>
 						</div>
 						<div className="w-full flex justify-center">
@@ -103,11 +95,7 @@ const AdminLogin = () => {
 					className="absolute top-20 w-60 right-40 -z-2"
 					data-aos="fade-bottom"
 				/>
-				<img
-					src={LeftBubble}
-					alt="left-bubble-img"
-					className="absolute left-0 bottom-0 -z-2"
-				/>
+				<img src={LeftBubble} alt="left-bubble-img" className="absolute left-0 bottom-0 -z-2" />
 			</div>
 		</div>
 	);

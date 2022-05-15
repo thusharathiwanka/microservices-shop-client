@@ -24,17 +24,17 @@ const AdminPackages = () => {
 
 	const getPackages = async () => {
 		try {
-			const res = await axios.get("packages");
-			setPackages(res.data.packages);
+			const res = await axios.get("products/");
+			setPackages(res.data.data);
 			setIsLoading(false);
 		} catch (err) {
 			console.error(err.response);
 		}
 	};
 
-	const deletePackage = async (id) => {
+	const deletePackage = async id => {
 		try {
-			await axios.delete(`packages/${id}`);
+			await axios.delete(`products/${id}`);
 			getPackages();
 			setShowModal(false);
 		} catch (err) {
@@ -64,24 +64,17 @@ const AdminPackages = () => {
 				/>
 			)}
 			<div className="ml-80 mt-20">
-				<div
-					className="flex justify-end mx-10"
-					data-aos="fade-left"
-					data-aos-delay="100"
-				>
+				<div className="flex justify-end mx-10" data-aos="fade-left" data-aos-delay="100">
 					<Link
 						className="ml-5 font-semibold text-lg bg-light-blue text-white py-3 px-8 rounded-full flex justify-center items-center"
 						to="/auth/admin/packages/new"
 					>
 						<FiPlus className="text-2xl mr-2" />
-						New Package
+						New Product
 					</Link>
 				</div>
-				<h1
-					className="text-5xl font-extrabold pb-10 text-center"
-					data-aos="fade-up"
-				>
-					Pricing & Packages
+				<h1 className="text-5xl font-extrabold pb-10 text-center" data-aos="fade-up">
+					Pricing & Products
 				</h1>
 				<Sidebar />
 				{isLoading ? (
@@ -117,6 +110,12 @@ const AdminPackages = () => {
 														scope="col"
 														className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"
 													>
+														Updated At
+													</th>
+													<th
+														scope="col"
+														className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"
+													>
 														Status
 													</th>
 													<th
@@ -128,7 +127,7 @@ const AdminPackages = () => {
 												</tr>
 											</thead>
 											<tbody className="bg-white divide-y divide-gray-200">
-												{packages.map((packageItem) => {
+												{packages.map(packageItem => {
 													packageItem.status === "active"
 														? (statusStyle = "bg-green-100 text-green-800")
 														: (statusStyle = "bg-red-100 text-red-800");
@@ -140,7 +139,7 @@ const AdminPackages = () => {
 																	<div className="flex-shrink-0 h-10 w-10">
 																		<img
 																			className="h-10 w-10 rounded-full object-cover"
-																			src={imageURL + packageItem.src}
+																			src={packageItem.src}
 																			alt="package-img"
 																		/>
 																	</div>
@@ -158,9 +157,12 @@ const AdminPackages = () => {
 															</td>
 															<td className="px-6 py-4 whitespace-nowrap">
 																<div className="text-sm text-gray-900">
-																	{new Date(
-																		packageItem.createdAt
-																	).toDateString()}
+																	{new Date(packageItem.createdAt).toDateString()}
+																</div>
+															</td>
+															<td className="px-6 py-4 whitespace-nowrap">
+																<div className="text-sm text-gray-900">
+																	{new Date(packageItem.updatedAt).toDateString()}
 																</div>
 															</td>
 															<td className="px-6 py-4 whitespace-nowrap">

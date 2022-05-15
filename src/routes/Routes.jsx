@@ -83,7 +83,7 @@ const Routes = () => {
 				<ModeratorLogin />
 			</Route>
 			<Route exact path="/auth/admin/dashboard">
-				{loggedIn.state && loggedIn.role === "admin" ? (
+				{loggedIn.state && loggedIn.role === "Admin" ? (
 					<>
 						<AdminDashboard />
 					</>
@@ -92,7 +92,7 @@ const Routes = () => {
 				)}
 			</Route>
 			<Route exact path="/auth/admin/packages">
-				{loggedIn.state && loggedIn.role === "admin" ? (
+				{loggedIn.state && loggedIn.role === "Admin" ? (
 					<>
 						<AdminPackages />
 					</>
@@ -101,7 +101,7 @@ const Routes = () => {
 				)}
 			</Route>
 			<Route exact path="/auth/admin/packages/new">
-				{loggedIn.state && loggedIn.role === "admin" ? (
+				{loggedIn.state && loggedIn.role === "Admin" ? (
 					<>
 						<AdminNewPackage />
 					</>
@@ -110,7 +110,7 @@ const Routes = () => {
 				)}
 			</Route>
 			<Route exact path="/auth/admin/packages/update/:id">
-				{loggedIn.state && loggedIn.role === "admin" ? (
+				{loggedIn.state && loggedIn.role === "Admin" ? (
 					<>
 						<AdminUpdatePackage />
 					</>
@@ -119,7 +119,7 @@ const Routes = () => {
 				)}
 			</Route>
 			<Route exact path="/auth/admin/customers">
-				{loggedIn.state && loggedIn.role === "admin" ? (
+				{loggedIn.state && loggedIn.role === "Admin" ? (
 					<>
 						<AdminCustomer />
 					</>
@@ -128,7 +128,7 @@ const Routes = () => {
 				)}
 			</Route>
 			<Route exact path="/auth/admin/feedbacks">
-				{loggedIn.state && loggedIn.role === "admin" ? (
+				{loggedIn.state && loggedIn.role === "Admin" ? (
 					<>
 						<AdminFeedback />
 					</>

@@ -17,8 +17,8 @@ const ViewModal = ({ setShowViewModal, id }) => {
 	});
 	const getPackageInfo = async () => {
 		try {
-			const res = await axios.get(`packages/package/${id}`);
-			setSinglePackage(res.data.package);
+			const res = await axios.get(`products/product/${id}`);
+			setSinglePackage(res.data.data);
 			setIsLoading(false);
 		} catch (err) {
 			console.error(err.message);
@@ -41,10 +41,7 @@ const ViewModal = ({ setShowViewModal, id }) => {
 					className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
 					aria-hidden="true"
 				></div>
-				<span
-					className="hidden sm:inline-block sm:align-middle sm:h-screen"
-					aria-hidden="true"
-				>
+				<span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
 					&#8203;
 				</span>
 				<div
@@ -58,58 +55,42 @@ const ViewModal = ({ setShowViewModal, id }) => {
 							<div className="sm:flex sm:items-start mt-5">
 								<div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-24 sm:w-24 overflow-hidden">
 									<img
-										src={imageURL + singlePackage.src}
+										src={singlePackage.src}
 										alt="package-img"
 										className=" object-cover h-24 w-24"
 									/>
 								</div>
 								<div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full pr-4">
-									<h3
-										className="text-4xl font-bold text-gray-700"
-										id="modal-title"
-									>
+									<h3 className="text-4xl font-bold text-gray-700" id="modal-title">
 										{singlePackage.name}
 									</h3>
 									<p className="text-gray-400 text-base text-bold mt-2 pb-5">
 										{singlePackage.description}
 									</p>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											ID
-										</p>
-										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
-											{singlePackage._id}
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">ID</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">{singlePackage._id}</p>
 									</div>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											PRICE
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">PRICE</p>
 										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
 											{"LKR " + singlePackage.price + ".00"}
 										</p>
 									</div>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											STATUS
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">STATUS</p>
 										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
-											{singlePackage.status.charAt(0).toUpperCase() +
-												singlePackage.status.slice(1)}
+											{singlePackage.status.charAt(0).toUpperCase() + singlePackage.status.slice(1)}
 										</p>
 									</div>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											CREATED AT
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">CREATED AT</p>
 										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
 											{new Date(singlePackage.createdAt).toDateString()}
 										</p>
 									</div>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											UPDATED AT
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">UPDATED AT</p>
 										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
 											{new Date(singlePackage.updatedAt).toDateString()}
 										</p>

@@ -18,13 +18,10 @@ const Dashboard = () => {
 	const graphOneNames = ["Pending", "Processing", "Completed"];
 
 	const getTotalInfo = () => {
-		adminCardInfo.map(async (card) => {
+		adminCardInfo.map(async card => {
 			try {
 				const res = await axios.get(card.endpoint);
-				setTotals((prev) => [
-					...prev,
-					{ total: res.data.total, name: card.name, icon: card.icon },
-				]);
+				setTotals(prev => [...prev, { total: res.data.total, name: card.name, icon: card.icon }]);
 			} catch (err) {
 				console.error(err);
 			}
@@ -66,23 +63,7 @@ const Dashboard = () => {
 	return (
 		<div className=" text-gray-800">
 			<div className="ml-80 mt-20">
-				<div
-					className="flex justify-end mx-10"
-					data-aos="fade-left"
-					data-aos-delay="100"
-				>
-					<button
-						className="ml-5 font-semibold text-lg bg-light-blue text-white py-3 px-8 rounded-full flex justify-center items-center"
-						onClick={generateReport}
-					>
-						<FiDownload className="text-2xl mr-2" />
-						Download Summary
-					</button>
-				</div>
-				<h1
-					className="text-5xl font-extrabold pb-10 text-center"
-					data-aos="fade-up"
-				>
+				<h1 className="text-5xl font-extrabold pb-10 text-center" data-aos="fade-up">
 					Summary
 				</h1>
 				<Sidebar />
