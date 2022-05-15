@@ -8,8 +8,8 @@ const CustomerViewModal = ({ setShowViewModal, id }) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	const getCustomerInfo = async () => {
-		const res = await axios.get(`customers/${id}`);
-		setCustomer(res.data.customer);
+		const res = await axios.get(`users/${id}`);
+		setCustomer(res.data.data);
 		setIsLoading(false);
 	};
 
@@ -29,10 +29,7 @@ const CustomerViewModal = ({ setShowViewModal, id }) => {
 					className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
 					aria-hidden="true"
 				></div>
-				<span
-					className="hidden sm:inline-block sm:align-middle sm:h-screen"
-					aria-hidden="true"
-				>
+				<span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
 					&#8203;
 				</span>
 				<div
@@ -61,43 +58,26 @@ const CustomerViewModal = ({ setShowViewModal, id }) => {
 									</svg>
 								</div>
 								<div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full pr-4">
-									<h3
-										className="text-4xl font-bold text-gray-700"
-										id="modal-title"
-									>
+									<h3 className="text-4xl font-bold text-gray-700" id="modal-title">
 										{customer.name}
 									</h3>
-									<p className="text-gray-400 text-base text-bold mt-2 pb-5">
-										{customer.email}
-									</p>
+									<p className="text-gray-400 text-base text-bold mt-2 pb-5">{customer.email}</p>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											ID
-										</p>
-										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
-											{customer._id}
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">ID</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">{customer._id}</p>
 									</div>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											MOBILE
-										</p>
-										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
-											{customer.mobile}
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">MOBILE</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">{customer.mobile}</p>
 									</div>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											REGISTERED AT
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">REGISTERED AT</p>
 										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
 											{new Date(customer.createdAt).toDateString()}
 										</p>
 									</div>
 									<div className="flex justify-between w-full">
-										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">
-											UPDATED AT
-										</p>
+										<p className="text-gray-500 text-sm text-bold mt-2 font-bold">UPDATED AT</p>
 										<p className="text-gray-500 text-sm text-bold mt-2 pl-4">
 											{new Date(customer.updatedAt).toDateString()}
 										</p>

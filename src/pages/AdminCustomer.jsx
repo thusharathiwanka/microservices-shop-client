@@ -20,17 +20,17 @@ const AdminCustomer = () => {
 
 	const getCustomers = async () => {
 		try {
-			const res = await axios.get("/customers");
-			setCustomers(res.data.customers);
+			const res = await axios.get("/users");
+			setCustomers(res.data.data);
 			setIsLoading(false);
 		} catch (err) {
 			console.error(err.message);
 		}
 	};
 
-	const deleteCustomer = async (id) => {
+	const deleteCustomer = async id => {
 		try {
-			await axios.delete(`customers/${id}`);
+			await axios.delete(`users/${id}`);
 			getCustomers();
 			setShowModal(false);
 		} catch (err) {
@@ -60,10 +60,7 @@ const AdminCustomer = () => {
 				/>
 			)}
 			<div className="ml-80 mt-20">
-				<h1
-					className="text-5xl font-extrabold pb-10 text-center"
-					data-aos="fade-up"
-				>
+				<h1 className="text-5xl font-extrabold pb-10 text-center" data-aos="fade-up">
 					Registered Customers
 				</h1>
 				<Sidebar />
@@ -111,7 +108,7 @@ const AdminCustomer = () => {
 												</tr>
 											</thead>
 											<tbody className="bg-white divide-y divide-gray-200">
-												{customers.map((customer) => (
+												{customers.map(customer => (
 													<tr key={customer._id}>
 														<td className="px-6 py-4 whitespace-nowrap">
 															<div className="flex items-center">
@@ -128,9 +125,7 @@ const AdminCustomer = () => {
 															</div>
 														</td>
 														<td className="px-6 py-4 whitespace-nowrap">
-															<div className="text-sm text-gray-900">
-																{customer.email}
-															</div>
+															<div className="text-sm text-gray-900">{customer.email}</div>
 														</td>
 														<td className="px-6 py-4 whitespace-nowrap">
 															<div className="text-sm text-gray-900">
@@ -138,9 +133,7 @@ const AdminCustomer = () => {
 															</div>
 														</td>
 														<td className="px-6 py-4 whitespace-nowrap">
-															<div className="text-sm text-gray-900">
-																{customer.mobile}
-															</div>
+															<div className="text-sm text-gray-900">{customer.mobile}</div>
 														</td>
 														<td className="px-6 py-4 whitespace-nowrap text-right text-xl font-medium flex items-center">
 															<button
