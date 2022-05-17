@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext";
@@ -14,19 +13,16 @@ const SidebarItem = ({ sidebarLink, activeLink }) => {
 	const { getLoggedIn } = useContext(AuthContext);
 
 	const logout = async () => {
-		await axios.get("/users/logout");
-		await getLoggedIn();
 		history.push("/");
+
+		localStorage.clear();
+		setTimeout(() => window.location.reload(), 3);
 	};
 
 	return (
 		<>
-			{showModal && (
-				<SignoutConfirmModal setShowModal={setShowModal} execute={logout} />
-			)}
-			<li
-				className={`hover:text-gray-900 text-gray-800 focus:text-gray-900 ${active}`}
-			>
+			{showModal && <SignoutConfirmModal setShowModal={setShowModal} execute={logout} />}
+			<li className={`hover:text-gray-900 text-gray-800 focus:text-gray-900 ${active}`}>
 				{sidebarLink.path ? (
 					<Link
 						to={sidebarLink.path}
@@ -35,9 +31,7 @@ const SidebarItem = ({ sidebarLink, activeLink }) => {
 						<span className="inline-flex items-center justify-center h-12 w-12 text-2xl pl-5">
 							{sidebarLink.icon}
 						</span>
-						<span className="mx-5 font-semibold text-base">
-							{sidebarLink.name}
-						</span>
+						<span className="mx-5 font-semibold text-base">{sidebarLink.name}</span>
 					</Link>
 				) : (
 					<Link
@@ -47,9 +41,7 @@ const SidebarItem = ({ sidebarLink, activeLink }) => {
 						<span className="inline-flex items-center justify-center h-12 w-12 text-2xl pl-5">
 							{sidebarLink.icon}
 						</span>
-						<span className="mx-5 font-semibold text-base">
-							{sidebarLink.name}
-						</span>
+						<span className="mx-5 font-semibold text-base">{sidebarLink.name}</span>
 					</Link>
 				)}
 			</li>
