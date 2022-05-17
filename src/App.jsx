@@ -11,7 +11,7 @@ import AuthContextProvider from "./contexts/AuthContext";
 import CartContextProvider from "./contexts/CartContext";
 
 function App() {
-	axios.defaults.baseURL = "http://localhost:5000/";
+	axios.defaults.baseURL = "http://35.232.79.224:5000/";
 
 	useEffect(() => {
 		AOS.init({ duration: 800, easing: "ease-in-out-quad" });
